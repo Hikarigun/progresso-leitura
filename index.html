@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Progresso de leitura</title>
+  <meta name="description" content="Acompanhe a leitura página por página. As anotações ficam só neste navegador.">
+  <meta name="theme-color" content="#f4ecdf">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,560;7..72,680&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <p class="eyebrow">Caderno de leitura</p>
+        <h1>Progresso de leitura</h1>
+        <p class="lede">Um livro de cada vez. As anotações ficam só neste navegador.</p>
+      </div>
+      <div class="switcher" id="switcher">
+        <label class="switcher-label" for="book-select">Livro</label>
+        <div class="switcher-row">
+          <select id="book-select" aria-label="Livro aberto"></select>
+          <button type="button" id="new-book" class="btn btn-secondary">Novo livro</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats card" id="stats" aria-label="Resumo deste livro"></section>
+
+    <div id="list-view">
+      <button type="button" id="primary-action" class="btn btn-primary btn-xl">Ler página</button>
+
+      <form id="settings" class="settings card" autocomplete="off">
+        <div class="settings-head">
+          <h2>Ajustes deste livro</h2>
+          <p class="hint">Mudar este livro não altera os outros.</p>
+        </div>
+        <div class="settings-grid">
+          <label class="field-wide" for="book-name">Nome do livro
+            <input id="book-name" type="text" maxlength="120" placeholder="Ex.: O livro da vez" autocomplete="off">
+          </label>
+          <label for="start-page">Página inicial
+            <input id="start-page" type="number" inputmode="numeric" min="1" step="1" placeholder="1">
+          </label>
+          <label for="end-page">Página final
+            <input id="end-page" type="number" inputmode="numeric" min="1" step="1" placeholder="1">
+          </label>
+          <label for="meta-pages">Meta (páginas)
+            <input id="meta-pages" type="number" inputmode="numeric" min="1" max="2000" step="1" placeholder="1">
+          </label>
+          <label for="minutes-per-page">Minutos por página
+            <input id="minutes-per-page" type="number" inputmode="numeric" min="1" max="600" step="1" placeholder="Ex.: 7">
+          </label>
+          <label class="field-wide" for="deadline">Prazo
+            <input id="deadline" type="datetime-local">
+            <span class="hint">Horário de Brasília.</span>
+          </label>
+        </div>
+        <p id="range-hint" class="hint"></p>
+        <p id="form-message" class="form-message" role="status"></p>
+        <div class="settings-actions">
+          <button type="button" id="export-notes" class="btn btn-secondary">Exportar anotações</button>
+          <button type="button" id="delete-book" class="btn btn-ghost danger" hidden>Excluir este livro</button>
+        </div>
+        <p class="hint">A exportação baixa um Markdown só deste livro.</p>
+      </form>
+
+      <section class="list-section card" aria-labelledby="list-heading">
+        <div class="list-head">
+          <h2 id="list-heading">Páginas</h2>
+          <p id="list-sub" class="hint"></p>
+        </div>
+        <div id="page-list"></div>
+      </section>
+    </div>
+
+    <div id="page-view" hidden>
+      <button type="button" id="back" class="btn btn-ghost back">← Lista</button>
+      <article id="session" class="session card"></article>
+    </div>
+  </div>
+  <noscript>
+    <p>Este caderno precisa de JavaScript. As anotações continuam só no seu navegador.</p>
+  </noscript>
+  <script src="app.js"></script>
+</body>
+</html>
